@@ -1,12 +1,8 @@
-FROM node:12.18.1
-
-WORKDIR /app
-
-COPY package.json package.json
-COPY package-lock.json package-lock.json
-
+FROM node:8-alpine
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY package*.json ./
+COPY ./ .
 RUN npm install
-
-COPY . .
-
-CMD [ "node", "server.js" ]
+EXPOSE 5000
+CMD [ "npm", "start" ]
